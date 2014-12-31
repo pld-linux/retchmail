@@ -1,0 +1,20 @@
+--- retchmail-1.1.1/wvpopclient.cc.orig	2008-10-22 16:28:54.000000000 +0200
++++ retchmail-1.1.1/wvpopclient.cc	2014-12-31 18:12:07.558977259 +0100
+@@ -8,6 +8,7 @@
+  * license.
+  */
+ 
++#include <algorithm>
+ #include <unistd.h>
+ #include "wvstring.h"
+ #include "wvpopclient.h"
+@@ -455,8 +456,7 @@
+ 		     && !strncasecmp(line, "X-Envelope-To: ", 14))
+ 	    {
+ 		WvString sendto = line+strlen("X-Envelope-To:");
+-		sendto.edit();
+-		cptr = strchr(sendto, '@');
++		cptr = strchr(sendto.edit(), '@');
+ 		if (cptr)
+ 		    *cptr = 0;
+ 		trim_string(sendto.edit());
